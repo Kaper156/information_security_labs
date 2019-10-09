@@ -1,8 +1,4 @@
-ABC_LENGTH = 26
-ABC_UPPER_FIRST = 'A'
-ABC_LOWER_FIRST = 'a'
-FILE_PATH_INPUT = 'text.txt'
-FILE_PATH_OUT = 'lab2_1.out.txt'
+from Lab2.lab2_settings import *
 
 
 def register(letter):
