@@ -1,4 +1,5 @@
-from Lab2.lab2_main import register
+from Lab2.lab2_main import get_first_letter_by_register, get_only_letters
+from Lab2.lab2_main import get_letter_freq
 from Lab2.lab2_settings import *
 
 
@@ -13,10 +14,25 @@ def affine(text, A, B, is_decipher=False):
             result += letter
             continue
 
-        offset = register(letter)
+        offset = get_first_letter_by_register(letter)
         code = ord(letter) - offset
         result += chr(transformation(code) + offset)
     return result
+
+
+def brute_force(source_text, ciphered_text):
+    freq = get_letter_freq(ciphered_text)
+    print(freq)
+    bruted_text = ciphered_text
+    code_len = 1
+    index = 0
+    get_only_letters(ciphered_text)
+
+    while index != ABC_INDEX_COINCIDENCE:
+
+        index =
+
+        code_len += 1
 
 
 def test():
@@ -54,9 +70,11 @@ if __name__ == '__main__':
     test()
     with open(FILE_PATH_INPUT, 'rt') as f_in:
         text = f_in.read()
-    key_a = int(input("Enter key A:"))
-    key_b = int(input("Enter key B:"))
+    key_a = 3 or int(input("Enter key A:"))
+    key_b = 2 or int(input("Enter key B:"))
     cipher = "".join(map(lambda x: affine(x, key_a, key_b), text))
     with open(FILE_PATH_OUT, 'wt') as f:
         f.write(cipher)
     print(cipher)
+    get_letter_freq(cipher)
+    brute_force(text, cipher)

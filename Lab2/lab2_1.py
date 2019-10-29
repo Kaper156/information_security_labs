@@ -1,11 +1,12 @@
-from Lab2.lab2_main import register
+from Lab2.lab2_main import get_first_letter_by_register
 from Lab2.lab2_settings import *
 
 
 def caesar_cipher(letter: str, key: int):
     if not letter.isalpha():
         return letter
-    return chr((ord(letter) - register(letter) + key) % ABC_LENGTH + register(letter))
+    return chr((ord(letter) - get_first_letter_by_register(letter) + key) % ABC_LENGTH
+               + get_first_letter_by_register(letter))
 
 
 def in_one_string(text=None, k=None):
