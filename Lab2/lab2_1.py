@@ -1,8 +1,5 @@
+from Lab2.lab2_main import register
 from Lab2.lab2_settings import *
-
-
-def register(letter):
-    return [ord(ABC_UPPER_FIRST), ord(ABC_LOWER_FIRST)][int(letter.islower())]
 
 
 def caesar_cipher(letter: str, key: int):
@@ -21,6 +18,18 @@ def in_one_string(text=None, k=None):
             (ord(x) + key - (ord(a) if x.islower() else ord(A))) % L
             + (ord(a) if x.islower() else ord(A))) if x.isalpha() else x,
         text or open(FILE_PATH_INPUT, 'rt').read()))
+
+
+def brute_force(source_text, ciphered_text):
+    key = 0
+    bruted_text = ciphered_text
+    while source_text != bruted_text:
+        bruted_text = in_one_string(ciphered_text, key)
+        key += 1
+        if key > ABC_LENGTH:
+            print("Bad try. It's too difficult for me!")
+            break
+    print(f'Text bruteforced by key {key}, source text:\n\n{source_text} \n\t And bruteforced text:\n\n{bruted_text} ')
 
 
 def test():
@@ -49,4 +58,5 @@ if __name__ == '__main__':
     cipher = "".join(map(lambda x: caesar_cipher(x, key), text))
     with open(FILE_PATH_OUT, 'wt') as f:
         f.write(cipher)
-    print(cipher)
+    print(f'Encoded by caesar-cipher text:\n\n{cipher}\n\n')
+    brute_force(text, cipher)
