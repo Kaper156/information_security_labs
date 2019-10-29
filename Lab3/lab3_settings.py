@@ -1,0 +1,5 @@
+ABC_LENGTH = 26
+ABC_UPPER_FIRST = 'A'
+ABC_LOWER_FIRST = 'a'
+FILE_PATH_INPUT = 'text.txt'
+FILE_PATH_OUT = 'lab3.out.txt'
