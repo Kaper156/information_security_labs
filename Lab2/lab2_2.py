@@ -1,4 +1,4 @@
-from Lab2.lab2_1 import register
+from Lab2.lab2_main import register
 from Lab2.lab2_settings import *
 
 
