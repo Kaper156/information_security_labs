@@ -1,5 +1,7 @@
+from functools import reduce
+
 from Lab3.lab3_settings import *
-from Lab2.lab2_main import get_first_letter_by_register
+from Lab2.lab2_main import *
 
 
 def viginer_cipher(l, c):
@@ -31,6 +33,15 @@ def viginer(text, code_word, decipher=False):
         else:
             result += letter
     return result
+
+
+def brute_force(ciphered_text):
+    letters_freq = get_letter_freq(ciphered_text)
+    ci = 0
+    code_len = 0
+    while ci < ABC_INDEX_COINCIDENCE:
+        code_len += 1
+        ci = reduce(lambda p, lc: p+pow(lc, 2), letters_freq.values())
 
 
 def test():
