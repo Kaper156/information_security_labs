@@ -3,7 +3,7 @@ from Labs_main.settings.main import *
 # FILE_PATH_INPUT = 'text.txt'
 FILE_PATH_OUT = 'lab3.out.txt'
 ABC_INDEX_COINCIDENCE = 0.06497  # 0.065
-ABC_FREQ_E = 0.001
+ABC_FREQ_E = 0.05
 
 ABC_FREQ = {
     "E": 12.7 / 100,
