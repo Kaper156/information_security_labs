@@ -1,6 +1,6 @@
 from functools import reduce
 
-from Lab2.lab2_main import *
+from Labs_main.common.misc import *
 # from Lab3.lab3_settings import *
 from Labs_main.settings.lab3 import *
 
@@ -89,9 +89,9 @@ def grouper(iterable, n, fillvalue=None):
     return zip_longest(fillvalue=fillvalue, *args)
 
 
-def get_n_rows_of_letters(text: str, n: int):
+def get_n_rows_of_letters(text: list, n: int):
     # text = get_only_letters(text)
-    return list(grouper(text, n))
+    return grouper(text, n)
 
 
 def get_freq_of_each_n_letter(text: str, letter: str, n: int, n_of: int):
@@ -133,6 +133,66 @@ def get_each_n_letter_freq(text: str, step: int):
 5. cnt++, вернутся к 2
 """
 
+'''
+            
+        
+'''
+
+
+def get_coincidence_index(enc_letters: str, gamma: int):
+    # Gamma - len of key
+    indexes = [0] * gamma
+    row_len = len(enc_letters) / gamma
+    for each_g in range(gamma):  # If gamma=4: 1,2,3,4
+        freqs_abc = [0] * ABC_LENGTH
+        for i in range(each_g, len(enc_letters), gamma):
+            letter_code = get_let_code(enc_letters[i])
+            freqs_abc[letter_code] += 1
+        for j in range(ABC_LENGTH):
+            indexes[each_g] += freqs_abc[j] * (freqs_abc[j] - 1)
+        indexes[each_g] = indexes[each_g] / (row_len * (row_len - 1))
+    avg_index = sum(indexes) / gamma
+    return avg_index
+
+
+def hack_caesar_by_freq(enc_letters: str):
+    # Сравнить частоты и частоты заданные (с погрешностью)
+    # Получим разницу между буквами в первом и втором словарях
+    # Это ключ
+    # enc_letters_freq = abc_freq_def_copy()
+    enc_letters_freq = [0] * ABC_LENGTH
+    typic_freq = abc_freq_to_list(ABC_FREQ)
+
+    for let_code in range(ABC_LENGTH):
+        enc_letters_freq[let_code] = enc_letters.count(chr(ord(ABC_LOWER_FIRST)+let_code)) / len(enc_letters)
+
+    offset = -1
+    while offset < ABC_LENGTH:
+        offset += 1
+        for let_index in range(ABC_LENGTH):
+            enc_index = (let_index + offset) % ABC_LENGTH
+            diff = typic_freq[let_index] - enc_letters_freq[enc_index]
+            if abs(diff) > ABC_FREQ_E:
+                break
+
+    return chr(ord(ABC_LOWER_FIRST) - offset)
+
+
+def brute(encrypted_text: str):
+    coincidence_index = 0
+    enc_letters = get_only_letters(encrypted_text)
+    key_len = 3
+    while coincidence_index < ABC_INDEX_COINCIDENCE and key_len < 20:
+        key_len += 1
+        coincidence_index = get_coincidence_index(enc_letters, key_len)
+        print(f"Index equal {coincidence_index} at {key_len} key length")
+    row_len = len(enc_letters) // key_len
+    rows = get_n_rows_of_letters(enc_letters, row_len)
+    key_word = str()
+    for row in rows:
+        key_word += hack_caesar_by_freq(row)
+    print(key_word)
+
 
 def test():
     text = "Some text"
@@ -147,6 +207,8 @@ if __name__ == '__main__':
     text = str()
     with open(FILE_PATH_INPUT_LARGE, 'rt') as f:
         text = f.read().strip()
-    text = viginer(text, "CODE")
-    print("Text encrypted with codeword: CODE")
-    brute_force(text)
+    code = "CODE" or input("Enter code:")
+    text = viginer(text, code)
+    print(f"Text encrypted with codeword: {code}")
+    # brute_force(text)
+    brute(text)
