@@ -1,6 +1,5 @@
-from Lab2.lab2_main import get_first_letter_by_register
-from Lab2.lab2_main import get_letter_freq
 from Lab2.lab2_settings import *
+from Labs_main.common.misc import get_letter_freq, get_first_letter_by_register
 
 
 def affine(text, A, B, is_decipher=False):

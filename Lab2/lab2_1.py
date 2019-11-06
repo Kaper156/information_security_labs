@@ -1,5 +1,5 @@
-from Lab2.lab2_main import get_first_letter_by_register
 from Lab2.lab2_settings import *
+from Labs_main.common.misc import get_first_letter_by_register
 
 
 def caesar_cipher(letter: str, key: int):
