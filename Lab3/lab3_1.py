@@ -155,41 +155,153 @@ def get_coincidence_index(enc_letters: str, gamma: int):
     return avg_index
 
 
-def hack_caesar_by_freq(enc_letters: str):
+def offset_abc(letters: list, offset: int):
+    k = [chr(offset + ord(letter)) for letter in ABC_FREQ.keys()]
+    return dict(zip(k, map(lambda l: letters.count(l) / len(letters), ABC_FREQ.keys())))
+
+
+def offset_letter(letter: str, offset: int):
+    reg_offset = get_first_letter_by_register(letter)
+    return chr(reg_offset + (get_let_code(letter) + offset) % ABC_LENGTH)
+
+
+def hack_caesar_by_freq(enc_letters):
     # Сравнить частоты и частоты заданные (с погрешностью)
     # Получим разницу между буквами в первом и втором словарях
     # Это ключ
     # enc_letters_freq = abc_freq_def_copy()
-    enc_letters_freq = [0] * ABC_LENGTH
-    typic_freq = abc_freq_to_list(ABC_FREQ)
 
-    for let_code in range(ABC_LENGTH):
-        enc_letters_freq[let_code] = enc_letters.count(chr(ord(ABC_LOWER_FIRST)+let_code)) / len(enc_letters)
+    enc_freqs = dict(zip(ABC_FREQ.keys(), map(lambda l: enc_letters.count(l) / len(enc_letters), ABC_FREQ.keys())))
+    typic_freqs = dict(zip(ABC_FREQ.keys(), ABC_FREQ.values()))
 
-    offset = -1
-    while offset < ABC_LENGTH:
-        offset += 1
-        for let_index in range(ABC_LENGTH):
-            enc_index = (let_index + offset) % ABC_LENGTH
-            diff = typic_freq[let_index] - enc_letters_freq[enc_index]
-            if abs(diff) > ABC_FREQ_E:
-                break
+    pogreshnosti = list()
+    for offset in range(ABC_LENGTH):
+        max_E = 1
+        for l, f in enc_freqs.items():
+            # real_let = chr(((ord(l) - ord(ABC_UPPER_FIRST) + offset) % ABC_LENGTH) + ord(ABC_UPPER_FIRST))
+            offseted_letter_freq = enc_freqs[offset_letter(l, offset)]
+            typic_letter_freq = typic_freqs[l]
+            diff = abs(offseted_letter_freq - typic_letter_freq)
+            max_E = min(diff, max_E)
+        pogreshnosti.append((offset, max_E))
 
-    return chr(ord(ABC_LOWER_FIRST) - offset)
+    pogreshnosti = sorted(pogreshnosti, key=lambda x: x[1])
+    _, Es = zip(pogreshnosti)
+
+    offset = pogreshnosti[0][0]
+    return chr(ord(ABC_UPPER_FIRST) + offset)
+
+    # '''
+    # Find similar and get avg of diff between letters
+    #
+    # '''
+    # simmilar = dict()
+    # for typic_letter, typic_freq in typic_freqs:
+    #     simmilar[typic_letter] = ABC_UPPER_FIRST, 1  # cause 1 is max
+    #     freq = 0
+    #     for enc_let, enc_freq in enc_freqs:
+    #         diff = abs(typic_freq - enc_freq)
+    #         if diff < simmilar[typic_letter][1]:
+    #             simmilar[typic_letter] = enc_let, diff
+    #             freq = enc_freq
+    #     # delete from enc similar
+    #     enc_freqs.remove((simmilar[typic_letter][0], freq))
+    #
+    # differences = list(map(lambda item: ord(item[0]) - ord(item[1][0]), simmilar.items()))
+    #
+    # avg = sum(differences) / len(differences)
+    # print(avg)
+    '''
+    Find similar and get avg of diff between letters
+
+    '''
+    # enc = dict(enc_freqs)
+    # typic = dict(typic_freqs)
+    #
+    # # similiar = list(zip(ABC_FREQ.keys(), [1] * ABC_LENGTH))
+    # differences = list()  # [0] * ABC_LENGTH
+    # for t_let, t_freq in typic.items():
+    #     sim_letter = ABC_UPPER_FIRST
+    #     sim_freq = 1
+    #     for e_let, e_freq in enc.items():
+    #         diff = abs(t_freq - e_freq)
+    #         if diff < sim_freq:
+    #             sim_letter = e_let
+    #             sim_freq = e_freq
+    #     del enc[sim_letter]
+    #     differences.append(ord(t_let) - ord(sim_letter))
+    #
+    # print(differences)
+    # avg = round(sum(differences) / len(differences))
+    # print(avg)
+    # return chr(ord(ABC_UPPER_FIRST) + avg)
+    '''
+    With sorted dicts comparing
+    '''
+    # enc_freq = sorted(enc_freq, key=lambda x: x[1])
+    # typic_freq = sorted(typic_freq, key=lambda x: x[1])
+    # print(enc_freq)
+    # print(typic_freq)
+    # diff_letters = enc_freq[0][0], typic_freq[0][0]
+    # return chr(ord(ABC_LOWER_FIRST) + ord(diff_letters[1]) - ord(diff_letters[0]))
+
+    '''
+    Old style
+    '''
+    # enc_letters_freq = [0] * ABC_LENGTH
+    # typic_freq = abc_freq_to_list(ABC_FREQ)
+    #
+    # for let_code in range(ABC_LENGTH):
+    #     enc_letters_freq[let_code] = enc_letters.count(chr(ord(ABC_LOWER_FIRST) + let_code)) / len(enc_letters)
+    #
+    # offset = -1
+    # while offset < ABC_LENGTH:
+    #     offset += 1
+    #     for let_index in range(ABC_LENGTH):
+    #         enc_index = (let_index + offset) % ABC_LENGTH
+    #         diff = typic_freq[let_index] - enc_letters_freq[enc_index]
+    #         if abs(diff) > ABC_FREQ_E:
+    #             break
+    #
+    # return chr(ord(ABC_LOWER_FIRST) - offset)
+
+
+def chunkIt(seq, num):
+    avg = len(seq) / float(num)
+    out = []
+    last = 0.0
+
+    while last < len(seq):
+        out.append(seq[int(last):int(last + avg)])
+        last += avg
+
+    return out
+
+
+def split_iter(letters: list, n: int):
+    local_copy = letters.copy()
+    length = (len(letters) // n) * n
+    for i in range(n):
+        yield [local_copy[j + i] for j in range(0, length, n)]
 
 
 def brute(encrypted_text: str):
     coincidence_index = 0
-    enc_letters = get_only_letters(encrypted_text)
-    key_len = 3
-    while coincidence_index < ABC_INDEX_COINCIDENCE and key_len < 20:
-        key_len += 1
-        coincidence_index = get_coincidence_index(enc_letters, key_len)
-        print(f"Index equal {coincidence_index} at {key_len} key length")
-    row_len = len(enc_letters) // key_len
-    rows = get_n_rows_of_letters(enc_letters, row_len)
+    enc_letters = get_only_letters(encrypted_text.upper())
+    key_len = 4  # TODO del
+    # while coincidence_index < ABC_INDEX_COINCIDENCE and key_len < 20:
+    #     key_len += 1
+    #     coincidence_index = get_coincidence_index(enc_letters, key_len)
+    #     print(f"Index equal {coincidence_index} at {key_len} key length")
+    # rows = chunkIt(enc_letters, key_len)
     key_word = str()
+    # for row in rows:
+    #     key_word += hack_caesar_by_freq(row)
+    #
+    row_len = len(enc_letters) // key_len
+    rows = split_iter(enc_letters, key_len)
     for row in rows:
+        # print(row)
         key_word += hack_caesar_by_freq(row)
     print(key_word)
 
@@ -207,6 +319,14 @@ if __name__ == '__main__':
     text = str()
     with open(FILE_PATH_INPUT_LARGE, 'rt') as f:
         text = f.read().strip()
+    #
+    # text = """
+    # AAAA
+    # BBBB
+    # CCCC
+    # DDDD
+    # EE
+    # """
     code = "CODE" or input("Enter code:")
     text = viginer(text, code)
     print(f"Text encrypted with codeword: {code}")
