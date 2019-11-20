@@ -171,6 +171,7 @@ def hack_caesar_by_freq(enc_letters):
     # Это ключ
     # enc_letters_freq = abc_freq_def_copy()
 
+
     enc_freqs = dict(zip(ABC_FREQ.keys(), map(lambda l: enc_letters.count(l) / len(enc_letters), ABC_FREQ.keys())))
     typic_freqs = dict(zip(ABC_FREQ.keys(), ABC_FREQ.values()))
 
@@ -245,8 +246,14 @@ def hack_caesar_by_freq(enc_letters):
     # diff_letters = enc_freq[0][0], typic_freq[0][0]
     # return chr(ord(ABC_LOWER_FIRST) + ord(diff_letters[1]) - ord(diff_letters[0]))
 
+    '''
+    Old style
+    '''
+    # enc_letters_freq = [0] * ABC_LENGTH
+    # typic_freq = abc_freq_to_list(ABC_FREQ)
+    #
     # for let_code in range(ABC_LENGTH):
-    #     enc_letters_freq[let_code] = enc_letters.count(chr(ord(ABC_LOWER_FIRST)+let_code)) / len(enc_letters)
+    #     enc_letters_freq[let_code] = enc_letters.count(chr(ord(ABC_LOWER_FIRST) + let_code)) / len(enc_letters)
     #
     # offset = -1
     # while offset < ABC_LENGTH:
@@ -280,6 +287,7 @@ def brute(encrypted_text: str):
     # row_len = len(enc_letters) // key_len
     rows = split_iter(enc_letters, key_len)
     for row in rows:
+        # print(row)
         key_word += hack_caesar_by_freq(row)
     print(key_word)
 
