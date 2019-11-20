@@ -245,14 +245,8 @@ def hack_caesar_by_freq(enc_letters):
     # diff_letters = enc_freq[0][0], typic_freq[0][0]
     # return chr(ord(ABC_LOWER_FIRST) + ord(diff_letters[1]) - ord(diff_letters[0]))
 
-    '''
-    Old style
-    '''
-    # enc_letters_freq = [0] * ABC_LENGTH
-    # typic_freq = abc_freq_to_list(ABC_FREQ)
-    #
     # for let_code in range(ABC_LENGTH):
-    #     enc_letters_freq[let_code] = enc_letters.count(chr(ord(ABC_LOWER_FIRST) + let_code)) / len(enc_letters)
+    #     enc_letters_freq[let_code] = enc_letters.count(chr(ord(ABC_LOWER_FIRST)+let_code)) / len(enc_letters)
     #
     # offset = -1
     # while offset < ABC_LENGTH:
@@ -266,42 +260,19 @@ def hack_caesar_by_freq(enc_letters):
     # return chr(ord(ABC_LOWER_FIRST) - offset)
 
 
-def chunkIt(seq, num):
-    avg = len(seq) / float(num)
-    out = []
-    last = 0.0
-
-    while last < len(seq):
-        out.append(seq[int(last):int(last + avg)])
-        last += avg
-
-    return out
-
-
-def split_iter(letters: list, n: int):
-    local_copy = letters.copy()
-    length = (len(letters) // n) * n
-    for i in range(n):
-        yield [local_copy[j + i] for j in range(0, length, n)]
-
-
 def brute(encrypted_text: str):
     coincidence_index = 0
     enc_letters = get_only_letters(encrypted_text.upper())
     key_len = 4  # TODO del
-    # while coincidence_index < ABC_INDEX_COINCIDENCE and key_len < 20:
-    #     key_len += 1
-    #     coincidence_index = get_coincidence_index(enc_letters, key_len)
-    #     print(f"Index equal {coincidence_index} at {key_len} key length")
+    while coincidence_index < ABC_INDEX_COINCIDENCE and key_len < 20:
+        key_len += 1
+        coincidence_index = get_coincidence_index(enc_letters, key_len)
+        print(f"Index equal {coincidence_index} at {key_len} key length")
     # rows = chunkIt(enc_letters, key_len)
     key_word = str()
-    # for row in rows:
-    #     key_word += hack_caesar_by_freq(row)
-    #
-    row_len = len(enc_letters) // key_len
+    # row_len = len(enc_letters) // key_len
     rows = split_iter(enc_letters, key_len)
     for row in rows:
-        # print(row)
         key_word += hack_caesar_by_freq(row)
     print(key_word)
 
