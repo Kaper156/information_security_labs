@@ -115,22 +115,28 @@ def test():
 if __name__ == '__main__':
     test()
     text = str()
-    with open(FILE_PATH_INPUT_LARGE, 'rt') as f:
+    with open(FILE_PATH_INPUT_LARGE, 'rt', encoding='utf8') as f:
         text = f.read().strip()
     print("Part from source text:")
     print(text[:200])
     print()
-    code = "CODEWORD" or input("Enter code:")
+    code = "LIBRARY" or input("Enter code:")
     text = viginer(text, code)
 
     print(f"Text encrypted with codeword: {code}")
     print("Part from ciphered text:")
     print(text[:200])
     print()
+    with open(FILE_PATH_OUT, 'wt') as f:
+        f.write(text)
 
     key = brute(text)
+    print(key)
     assert code.upper() == key  # Test without register checking
     text = viginer(text, key, True)
     print(f"I think codeword is - '{key}'")
     print("Part from deciphered text:")
     print(text[:200])
+    # TODO fix: A -> [
+    # LIBRARY -> LIBR[RY
+
