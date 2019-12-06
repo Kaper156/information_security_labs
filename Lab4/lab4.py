@@ -5,6 +5,13 @@ def gamma_key(lastkey: int, a: int, b: int, m: int):
     return (lastkey * a + b) % m
 
 
+def gamma_key_gen(lastkey: int, a: int, b: int, m: int, length: int):
+    for i in range(length):
+        key = gamma_key(lastkey, a, b, m)
+        yield key
+        lastkey = key
+
+
 def gamma_cipher(text, key: int, a: int, b: int, m: int):
     for letter in text:
         # yield ord(letter) ^ key
@@ -38,14 +45,13 @@ def test():
 from Labs_main.settings.main import FILE_PATH_INPUT_LARGE
 
 if __name__ == '__main__':
-
     text = ''
     with open(FILE_PATH_INPUT_LARGE, 'rt', encoding='utf8') as f:
         text = f.read().strip()
-    a = 3   # int(input("Please enter A value:")) or
-    b = 2   # int(input("Please enter B value:")) or
-    m = 40692   # int(input("Please enter M value:")) or
-    key = 25   # int(input("Please enter start key:")) or
+    a = 3  # int(input("Please enter A value:")) or
+    b = 2  # int(input("Please enter B value:")) or
+    m = 40692  # int(input("Please enter M value:")) or
+    key = 25  # int(input("Please enter start key:")) or
     print(f"Part of the text before ciphering: \n{text[:200]}")
     print()
     print("CIPHERING")
