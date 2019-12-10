@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>MainWindow</class>
+    <widget class="QMainWindow" name="MainWindow">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>1209</width>
+                <height>652</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>MainWindow</string>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                    <layout class="QGridLayout" name="gridLayout">
+                        <item row="0" column="0">
+                            <widget class="QToolBox" name="toolBox">
+                                <property name="currentIndex">
+                                    <number>0</number>
+                                </property>
+                                <widget class="QWidget" name="pageAlphabet">
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>0</x>
+                                            <y>0</y>
+                                            <width>467</width>
+                                            <height>402</height>
+                                        </rect>
+                                    </property>
+                                    <attribute name="label">
+                                        <string>Алфавит</string>
+                                    </attribute>
+                                    <layout class="QFormLayout" name="formLayout">
+                                        <item row="0" column="0">
+                                            <widget class="QLabel" name="label">
+                                                <property name="text">
+                                                    <string>Мощность:</string>
+                                                </property>
+                                                <property name="alignment">
+                                                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="0" column="1">
+                                            <widget class="QSpinBox" name="sbAbcLength">
+                                                <property name="minimum">
+                                                    <number>1</number>
+                                                </property>
+                                                <property name="maximum">
+                                                    <number>2999</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="1" column="0">
+                                            <widget class="QLabel" name="label_2">
+                                                <property name="text">
+                                                    <string>Первая прописная:</string>
+                                                </property>
+                                                <property name="alignment">
+                                                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="1" column="1">
+                                            <widget class="QLineEdit" name="leAbcFL">
+                                                <property name="maxLength">
+                                                    <number>1</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="2" column="0">
+                                            <widget class="QLabel" name="label_3">
+                                                <property name="text">
+                                                    <string>Первая заглавная:</string>
+                                                </property>
+                                                <property name="alignment">
+                                                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="2" column="1">
+                                            <widget class="QLineEdit" name="leAbcFU">
+                                                <property name="maxLength">
+                                                    <number>1</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="7" column="0">
+                                            <widget class="QLabel" name="label_4">
+                                                <property name="text">
+                                                    <string>Индекс совападений:</string>
+                                                </property>
+                                                <property name="textFormat">
+                                                    <enum>Qt::PlainText</enum>
+                                                </property>
+                                                <property name="wordWrap">
+                                                    <bool>true</bool>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="7" column="1">
+                                            <widget class="QDoubleSpinBox" name="dsbAbcFrequency">
+                                                <property name="decimals">
+                                                    <number>5</number>
+                                                </property>
+                                                <property name="maximum">
+                                                    <double>1.000000000000000</double>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="8" column="0">
+                                            <widget class="QLabel" name="label_5">
+                                                <property name="text">
+                                                    <string>Частоты букв:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="8" column="1">
+                                            <widget class="QTableView" name="tvAbcLettersFreqs"/>
+                                        </item>
+                                        <item row="4" column="0">
+                                            <widget class="QLabel" name="label_6">
+                                                <property name="text">
+                                                    <string>Автоподсчет:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="4" column="1">
+                                            <layout class="QHBoxLayout" name="horizontalLayout_2">
+                                                <item>
+                                                    <widget class="QPushButton" name="btnAbcLoadSource">
+                                                        <property name="text">
+                                                            <string>Выбрать образец</string>
+                                                        </property>
+                                                    </widget>
+                                                </item>
+                                                <item>
+                                                    <widget class="QLineEdit" name="leAbcSourcePath"/>
+                                                </item>
+                                                <item>
+                                                    <widget class="QPushButton" name="btnAbcCalcFreqs">
+                                                        <property name="text">
+                                                            <string>Подсчет частот</string>
+                                                        </property>
+                                                    </widget>
+                                                </item>
+                                            </layout>
+                                        </item>
+                                    </layout>
+                                </widget>
+                                <widget class="QWidget" name="pageCaesar">
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>0</x>
+                                            <y>0</y>
+                                            <width>467</width>
+                                            <height>402</height>
+                                        </rect>
+                                    </property>
+                                    <attribute name="label">
+                                        <string>Шифр цезаря</string>
+                                    </attribute>
+                                    <layout class="QFormLayout" name="formLayout_2">
+                                        <item row="0" column="0">
+                                            <widget class="QLabel" name="label_7">
+                                                <property name="text">
+                                                    <string>Ключ:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="0" column="1">
+                                            <widget class="QSpinBox" name="sbCaesarKey"/>
+                                        </item>
+                                    </layout>
+                                </widget>
+                                <widget class="QWidget" name="pageAffine">
+                                    <attribute name="label">
+                                        <string>Афинный шифр</string>
+                                    </attribute>
+                                    <layout class="QFormLayout" name="formLayout_3">
+                                        <item row="2" column="0">
+                                            <widget class="QLabel" name="label_8">
+                                                <property name="text">
+                                                    <string>B:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="2" column="1">
+                                            <widget class="QSpinBox" name="sbAffineB"/>
+                                        </item>
+                                        <item row="0" column="1">
+                                            <widget class="QSpinBox" name="sbAffineA"/>
+                                        </item>
+                                        <item row="0" column="0">
+                                            <widget class="QLabel" name="label_9">
+                                                <property name="text">
+                                                    <string>A:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="3" column="0">
+                                            <widget class="QLabel" name="label_10">
+                                                <property name="text">
+                                                    <string>-A:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="3" column="1">
+                                            <widget class="QSpinBox" name="sbAffine_A"/>
+                                        </item>
+                                    </layout>
+                                </widget>
+                                <widget class="QWidget" name="pageViginer">
+                                    <attribute name="label">
+                                        <string>Шифр Вижинера</string>
+                                    </attribute>
+                                    <layout class="QFormLayout" name="formLayout_4">
+                                        <item row="0" column="0">
+                                            <widget class="QLabel" name="label_11">
+                                                <property name="text">
+                                                    <string>Ключ:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="0" column="1">
+                                            <widget class="QLineEdit" name="leViginerKey"/>
+                                        </item>
+                                    </layout>
+                                </widget>
+                                <widget class="QWidget" name="pageGamma">
+                                    <attribute name="label">
+                                        <string>Гамма шифр</string>
+                                    </attribute>
+                                    <layout class="QFormLayout" name="formLayout_5">
+                                        <item row="6" column="0">
+                                            <widget class="QLabel" name="label_12">
+                                                <property name="text">
+                                                    <string>Нач. ключ:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="6" column="1">
+                                            <widget class="QSpinBox" name="sbGammaInitKey"/>
+                                        </item>
+                                        <item row="1" column="1">
+                                            <widget class="QSpinBox" name="sbGammaA"/>
+                                        </item>
+                                        <item row="3" column="1">
+                                            <widget class="QSpinBox" name="sbGammaB"/>
+                                        </item>
+                                        <item row="3" column="0">
+                                            <widget class="QLabel" name="label_14">
+                                                <property name="text">
+                                                    <string>B:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="1" column="0">
+                                            <widget class="QLabel" name="label_13">
+                                                <property name="text">
+                                                    <string>A:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="4" column="1">
+                                            <widget class="QSpinBox" name="sbGammaM"/>
+                                        </item>
+                                        <item row="4" column="0">
+                                            <widget class="QLabel" name="label_15">
+                                                <property name="text">
+                                                    <string>M:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </widget>
+                                <widget class="QWidget" name="pageFeistel">
+                                    <attribute name="label">
+                                        <string>Блочное шифрование Фейстеля</string>
+                                    </attribute>
+                                    <layout class="QFormLayout" name="formLayout_6">
+                                        <item row="3" column="0">
+                                            <widget class="QLabel" name="label_16">
+                                                <property name="text">
+                                                    <string>Размер блока:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="3" column="1">
+                                            <widget class="QSpinBox" name="sbFeistelBlockSize">
+                                                <property name="minimum">
+                                                    <number>2</number>
+                                                </property>
+                                                <property name="maximum">
+                                                    <number>1024</number>
+                                                </property>
+                                                <property name="singleStep">
+                                                    <number>2</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="4" column="1">
+                                            <widget class="QLineEdit" name="leFeistelEmptyChar">
+                                                <property name="maxLength">
+                                                    <number>1</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="4" column="0">
+                                            <widget class="QLabel" name="label_17">
+                                                <property name="text">
+                                                    <string>Дополняющий символ:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="5" column="0">
+                                            <widget class="QLabel" name="label_18">
+                                                <property name="text">
+                                                    <string>Раундов шифрования:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="5" column="1">
+                                            <widget class="QSpinBox" name="sbFeistelRounds">
+                                                <property name="minimum">
+                                                    <number>1</number>
+                                                </property>
+                                                <property name="maximum">
+                                                    <number>1024</number>
+                                                </property>
+                                                <property name="singleStep">
+                                                    <number>1</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="6" column="1">
+                                            <widget class="QLabel" name="label_19">
+                                                <property name="text">
+                                                    <string>В качестве функции шифрования - Гамма шифр, настройте его
+                                                    </string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </widget>
+                                <widget class="QWidget" name="pageFrequency">
+                                    <attribute name="label">
+                                        <string>Частотный анализ</string>
+                                    </attribute>
+                                </widget>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
+                <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_3">
+                        <item>
+                            <layout class="QVBoxLayout" name="verticalLayout_2">
+                                <item>
+                                    <layout class="QHBoxLayout" name="horizontalLayout">
+                                        <item>
+                                            <widget class="QPushButton" name="btnSetSource">
+                                                <property name="text">
+                                                    <string>Обзор</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QLineEdit" name="leSourcePath"/>
+                                        </item>
+                                        <item>
+                                            <widget class="QPushButton" name="btnLoadSource">
+                                                <property name="text">
+                                                    <string>Загрузить</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </item>
+                                <item>
+                                    <widget class="QPlainTextEdit" name="plainTextEdit"/>
+                                </item>
+                            </layout>
+                        </item>
+                        <item>
+                            <layout class="QVBoxLayout" name="verticalLayout">
+                                <item>
+                                    <widget class="QPushButton" name="btnCiphering">
+                                        <property name="text">
+                                            <string>Зашифровать &gt;&gt;</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <widget class="QPushButton" name="btnSwap">
+                                        <property name="text">
+                                            <string>&gt;&gt; Поменять &lt;&lt;</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <widget class="QPushButton" name="btnDeciphering">
+                                        <property name="text">
+                                            <string>&lt;&lt; Расшифровать</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                            </layout>
+                        </item>
+                        <item>
+                            <layout class="QVBoxLayout" name="verticalLayout_3">
+                                <item>
+                                    <layout class="QHBoxLayout" name="horizontalLayout_4">
+                                        <item>
+                                            <widget class="QPushButton" name="btnSetOut">
+                                                <property name="text">
+                                                    <string>Обзор</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QLineEdit" name="leOutPath"/>
+                                        </item>
+                                        <item>
+                                            <widget class="QPushButton" name="btnSaveSource">
+                                                <property name="text">
+                                                    <string>Сохранить</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </item>
+                                <item>
+                                    <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+                                </item>
+                            </layout>
+                        </item>
+                    </layout>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QMenuBar" name="menubar">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>1209</width>
+                    <height>21</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QStatusBar" name="statusbar"/>
+    </widget>
+    <tabstops>
+        <tabstop>sbAbcLength</tabstop>
+        <tabstop>leAbcFL</tabstop>
+        <tabstop>leAbcFU</tabstop>
+    </tabstops>
+    <resources/>
+    <connections/>
+</ui>
