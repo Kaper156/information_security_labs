@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from RGR.main.alphabet import Alphabet
+from RGR.core.alphabet import Alphabet
 
 
 class Cipher(ABC):
@@ -66,7 +66,7 @@ class LetterCipher(Cipher, ABC):
         else:
             func = self.letter_decipher
         for letter in text:
-            if not letter.isalpha():
+            if not self.abc.is_own_letter(letter):
                 result += letter
                 continue
             code = next(keys)

@@ -1,6 +1,6 @@
 import unittest
 
-from RGR.main.alphabet import load_english, Alphabet
+from RGR.core.alphabet import load_english, Alphabet
 
 
 class AlphabetOffsetTests(unittest.TestCase):
@@ -109,3 +109,11 @@ class AlphabetCreationWithoutFreqsTests(unittest.TestCase):
                        frequencies=None, text=big_text)
         sum_of_freqs = sum([freq for _, freq in abc.frequencies])
         self.assertAlmostEqual(1.0, sum_of_freqs, 4)
+
+
+class AlphabetIsOwnLetterTests(unittest.TestCase):
+    def test_cyrilic_text(self):
+        abc = load_english()
+        text = 'Какой-то текст с буквами, но на русском языке.'
+        for let in text:
+            self.assertFalse(abc.is_own_letter(let))

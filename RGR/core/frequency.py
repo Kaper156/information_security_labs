@@ -1,5 +1,5 @@
-from RGR.main.alphabet import Alphabet
-from RGR.main.misc import split_iter
+from RGR.core.alphabet import Alphabet
+from RGR.core.misc import split_iter
 
 
 class FrequencyAnalysis:

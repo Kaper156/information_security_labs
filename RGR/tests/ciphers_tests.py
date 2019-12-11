@@ -5,7 +5,7 @@ from RGR.ciphers.caesar import CaesarCipher
 from RGR.ciphers.feistel import FeistelCipher
 from RGR.ciphers.gamma import GammaCipher
 from RGR.ciphers.viginer import ViginerCipher
-from RGR.main.alphabet import load_english
+from RGR.core.alphabet import load_english
 
 
 class LetterCipherTest(unittest.TestCase):

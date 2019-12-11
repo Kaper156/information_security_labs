@@ -2,8 +2,8 @@ import unittest
 
 from RGR.ciphers.caesar import CaesarCipher
 from RGR.ciphers.viginer import ViginerCipher
-from RGR.main.alphabet import load_english
-from RGR.main.frequency import FrequencyAnalysis
+from RGR.core.alphabet import load_english
+from RGR.core.frequency import FrequencyAnalysis
 
 
 class FrequencyTest(unittest.TestCase):

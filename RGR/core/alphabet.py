@@ -1,3 +1,6 @@
+from itertools import chain
+
+
 class AlphabetCreationException(Exception):
     pass
 
@@ -17,7 +20,8 @@ class Alphabet:
 
         if len(frequencies) != length:
             raise AlphabetCreationException()
-
+        letters = chain(range(self.fu, self.fu + self.length), range(self.fl, self.fl + self.length))
+        self.abc = tuple(map(chr, letters))
         self.frequencies = frequencies
         self.index_coincidence = index_coincidence
 
@@ -44,6 +48,9 @@ class Alphabet:
         if is_upper:
             return chr(self.fu + (code % self.length))
         return chr(self.fl + (code % self.length))
+
+    def is_own_letter(self, letter: str):
+        return letter in self.abc
 
 
 def load_english() -> Alphabet:
