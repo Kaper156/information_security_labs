@@ -20,6 +20,10 @@ class Cipher(ABC):
     def deciphering(self, ciphered_text):
         return ciphered_text
 
+    def set_param(self, key, value):
+        if self.__dict__.get(key):
+            self.__dict__[key] = value
+
 
 class LetterCipher(Cipher, ABC):
     # Handle each letter: send letter-code to letter-cipher/decipher with key, chr it back with register

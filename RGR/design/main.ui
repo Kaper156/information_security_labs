@@ -20,14 +20,14 @@
                         <item row="0" column="0">
                             <widget class="QToolBox" name="toolBox">
                                 <property name="currentIndex">
-                                    <number>0</number>
+                                    <number>4</number>
                                 </property>
                                 <widget class="QWidget" name="pageAlphabet">
                                     <property name="geometry">
                                         <rect>
                                             <x>0</x>
                                             <y>0</y>
-                                            <width>467</width>
+                                            <width>549</width>
                                             <height>402</height>
                                         </rect>
                                     </property>
@@ -157,7 +157,7 @@
                                         <rect>
                                             <x>0</x>
                                             <y>0</y>
-                                            <width>467</width>
+                                            <width>549</width>
                                             <height>402</height>
                                         </rect>
                                     </property>
@@ -178,6 +178,14 @@
                                     </layout>
                                 </widget>
                                 <widget class="QWidget" name="pageAffine">
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>0</x>
+                                            <y>0</y>
+                                            <width>549</width>
+                                            <height>402</height>
+                                        </rect>
+                                    </property>
                                     <attribute name="label">
                                         <string>Афинный шифр</string>
                                     </attribute>
@@ -215,6 +223,14 @@
                                     </layout>
                                 </widget>
                                 <widget class="QWidget" name="pageViginer">
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>0</x>
+                                            <y>0</y>
+                                            <width>549</width>
+                                            <height>402</height>
+                                        </rect>
+                                    </property>
                                     <attribute name="label">
                                         <string>Шифр Вижинера</string>
                                     </attribute>
@@ -232,6 +248,14 @@
                                     </layout>
                                 </widget>
                                 <widget class="QWidget" name="pageGamma">
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>0</x>
+                                            <y>0</y>
+                                            <width>549</width>
+                                            <height>402</height>
+                                        </rect>
+                                    </property>
                                     <attribute name="label">
                                         <string>Гамма шифр</string>
                                     </attribute>
@@ -244,13 +268,25 @@
                                             </widget>
                                         </item>
                                         <item row="6" column="1">
-                                            <widget class="QSpinBox" name="sbGammaInitKey"/>
+                                            <widget class="QSpinBox" name="sbGammaInitKey">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
                                         </item>
                                         <item row="1" column="1">
-                                            <widget class="QSpinBox" name="sbGammaA"/>
+                                            <widget class="QSpinBox" name="sbGammaA">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
                                         </item>
                                         <item row="3" column="1">
-                                            <widget class="QSpinBox" name="sbGammaB"/>
+                                            <widget class="QSpinBox" name="sbGammaB">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
                                         </item>
                                         <item row="3" column="0">
                                             <widget class="QLabel" name="label_14">
@@ -267,7 +303,11 @@
                                             </widget>
                                         </item>
                                         <item row="4" column="1">
-                                            <widget class="QSpinBox" name="sbGammaM"/>
+                                            <widget class="QSpinBox" name="sbGammaM">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
                                         </item>
                                         <item row="4" column="0">
                                             <widget class="QLabel" name="label_15">
@@ -279,18 +319,26 @@
                                     </layout>
                                 </widget>
                                 <widget class="QWidget" name="pageFeistel">
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>0</x>
+                                            <y>0</y>
+                                            <width>549</width>
+                                            <height>402</height>
+                                        </rect>
+                                    </property>
                                     <attribute name="label">
                                         <string>Блочное шифрование Фейстеля</string>
                                     </attribute>
-                                    <layout class="QFormLayout" name="formLayout_6">
-                                        <item row="3" column="0">
+                                    <layout class="QGridLayout" name="gridLayout_2">
+                                        <item row="0" column="0">
                                             <widget class="QLabel" name="label_16">
                                                 <property name="text">
                                                     <string>Размер блока:</string>
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="3" column="1">
+                                        <item row="0" column="2">
                                             <widget class="QSpinBox" name="sbFeistelBlockSize">
                                                 <property name="minimum">
                                                     <number>2</number>
@@ -303,28 +351,28 @@
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="4" column="1">
-                                            <widget class="QLineEdit" name="leFeistelEmptyChar">
-                                                <property name="maxLength">
-                                                    <number>1</number>
-                                                </property>
-                                            </widget>
-                                        </item>
-                                        <item row="4" column="0">
+                                        <item row="1" column="0" colspan="2">
                                             <widget class="QLabel" name="label_17">
                                                 <property name="text">
                                                     <string>Дополняющий символ:</string>
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="5" column="0">
+                                        <item row="1" column="2">
+                                            <widget class="QLineEdit" name="leFeistelEmptyChar">
+                                                <property name="maxLength">
+                                                    <number>1</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="2" column="0" colspan="2">
                                             <widget class="QLabel" name="label_18">
                                                 <property name="text">
                                                     <string>Раундов шифрования:</string>
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="5" column="1">
+                                        <item row="2" column="2">
                                             <widget class="QSpinBox" name="sbFeistelRounds">
                                                 <property name="minimum">
                                                     <number>1</number>
@@ -337,7 +385,7 @@
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="6" column="1">
+                                        <item row="3" column="2">
                                             <widget class="QLabel" name="label_19">
                                                 <property name="text">
                                                     <string>В качестве функции шифрования - Гамма шифр, настройте его
@@ -345,9 +393,73 @@
                                                 </property>
                                             </widget>
                                         </item>
+                                        <item row="4" column="0">
+                                            <widget class="QLabel" name="label_20">
+                                                <property name="text">
+                                                    <string>A:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="4" column="1" colspan="2">
+                                            <widget class="QSpinBox" name="sbFeistelA">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="5" column="0">
+                                            <widget class="QLabel" name="label_22">
+                                                <property name="text">
+                                                    <string>B:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="5" column="1" colspan="2">
+                                            <widget class="QSpinBox" name="sbFeistelB">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="6" column="0">
+                                            <widget class="QLabel" name="label_23">
+                                                <property name="text">
+                                                    <string>M:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="6" column="1" colspan="2">
+                                            <widget class="QSpinBox" name="sbFeistelM">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="7" column="0">
+                                            <widget class="QLabel" name="label_21">
+                                                <property name="text">
+                                                    <string>Нач. ключ:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="7" column="1" colspan="2">
+                                            <widget class="QSpinBox" name="sbFeistelInitKey">
+                                                <property name="maximum">
+                                                    <number>99999</number>
+                                                </property>
+                                            </widget>
+                                        </item>
                                     </layout>
                                 </widget>
                                 <widget class="QWidget" name="pageFrequency">
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>0</x>
+                                            <y>0</y>
+                                            <width>549</width>
+                                            <height>402</height>
+                                        </rect>
+                                    </property>
                                     <attribute name="label">
                                         <string>Частотный анализ</string>
                                     </attribute>
@@ -361,6 +473,9 @@
                         <item>
                             <layout class="QVBoxLayout" name="verticalLayout_2">
                                 <item>
+                                    <widget class="QLineEdit" name="leSourcePath"/>
+                                </item>
+                                <item>
                                     <layout class="QHBoxLayout" name="horizontalLayout">
                                         <item>
                                             <widget class="QPushButton" name="btnSetSource">
@@ -368,9 +483,6 @@
                                                     <string>Обзор</string>
                                                 </property>
                                             </widget>
-                                        </item>
-                                        <item>
-                                            <widget class="QLineEdit" name="leSourcePath"/>
                                         </item>
                                         <item>
                                             <widget class="QPushButton" name="btnLoadSource">
@@ -382,7 +494,7 @@
                                     </layout>
                                 </item>
                                 <item>
-                                    <widget class="QPlainTextEdit" name="plainTextEdit"/>
+                                    <widget class="QPlainTextEdit" name="ptInputText"/>
                                 </item>
                             </layout>
                         </item>
@@ -414,6 +526,9 @@
                         <item>
                             <layout class="QVBoxLayout" name="verticalLayout_3">
                                 <item>
+                                    <widget class="QLineEdit" name="leOutPath"/>
+                                </item>
+                                <item>
                                     <layout class="QHBoxLayout" name="horizontalLayout_4">
                                         <item>
                                             <widget class="QPushButton" name="btnSetOut">
@@ -421,9 +536,6 @@
                                                     <string>Обзор</string>
                                                 </property>
                                             </widget>
-                                        </item>
-                                        <item>
-                                            <widget class="QLineEdit" name="leOutPath"/>
                                         </item>
                                         <item>
                                             <widget class="QPushButton" name="btnSaveSource">
@@ -435,7 +547,7 @@
                                     </layout>
                                 </item>
                                 <item>
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+                                    <widget class="QPlainTextEdit" name="ptOutText"/>
                                 </item>
                             </layout>
                         </item>

@@ -6,7 +6,7 @@ class FeistelCipher(Cipher):
         self.block_size = int(params['block_size'])
         self.empty_char = str(params.get('empty_char', ' '))
         self.rounds = int(params['rounds'])
-        self.is_unsafe_ok = bool(params['is_unsafe_ok'])
+        self.is_unsafe_ok = bool(params.get('is_unsafe_ok', False))
 
         # For key-gen
         self.A = params['A']

@@ -101,7 +101,7 @@ class AlphabetFromCodeTests(unittest.TestCase):
 class AlphabetCreationWithoutFreqsTests(unittest.TestCase):
     def test_create_from_mobydick(self):
         etallon = load_english()
-        with open('./source_texts/mobydick.txt', 'rt') as f:
+        with open('../../source_texts/mobydick.txt', 'rt') as f:
             big_text = f.read().strip()
         abc = Alphabet(etallon.length,
                        chr(etallon.fl), chr(etallon.fu),

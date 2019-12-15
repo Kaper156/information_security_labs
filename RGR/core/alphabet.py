@@ -1,10 +1,6 @@
 from itertools import chain
 
 
-class AlphabetCreationException(Exception):
-    pass
-
-
 class Alphabet:
     def __init__(self, length: int,
                  lower_first_letter: str, upper_first_letter: str,
@@ -15,18 +11,30 @@ class Alphabet:
         self.fu = ord(upper_first_letter)
         if frequencies is None:
             if text is None:
-                raise AlphabetCreationException()
-            frequencies = self.calc_frequencies(text)
+                self.__freqs_default__()
+            else:
+                frequencies = self.calc_frequencies(text)
 
-        if len(frequencies) != length:
-            raise AlphabetCreationException()
-        letters = chain(range(self.fu, self.fu + self.length), range(self.fl, self.fl + self.length))
-        self.abc = tuple(map(chr, letters))
+        self.abc = None
+        self.__calc_letters__()
+
         self.frequencies = frequencies
         self.index_coincidence = index_coincidence
 
+    def __reload__(self):
+        self.__calc_letters__()
+        self.__freqs_default__()
+        # print(f"{self.fu}\t{self.fl}\t{self.abc}\t{self.length}")
+
+    def __calc_letters__(self):
+        self.abc = tuple(map(chr, chain(range(self.fu, self.fu + self.length), range(self.fl, self.fl + self.length))))
+
+    def __freqs_default__(self):
+        def_freq = 1 / self.length
+        self.frequencies = [(let, def_freq) for let in self.abc]
+
     def calc_frequencies(self, text: str):
-        letters = list(map(lambda let_code: chr(let_code), range(self.fl, self.fl + self.length)))
+        letters = list(map(chr, range(self.fl, self.fl + self.length)))
 
         letters_of_text = "".join(filter(lambda term: term in letters, text.lower()))
         return [(letter, letters_of_text.count(letter) / len(letters_of_text)) for letter in letters]
@@ -51,6 +59,23 @@ class Alphabet:
 
     def is_own_letter(self, letter: str):
         return letter in self.abc
+
+    def set_length(self, val: int):
+        self.length = val
+        self.__reload__()
+
+    def set_fu(self, val: str):
+        if len(val):
+            self.fu = ord(val[0])
+            self.__reload__()
+
+    def set_fl(self, val: str):
+        if len(val):
+            self.fl = ord(val[0])
+            self.__reload__()
+
+    def set_index_coincidence(self, val):
+        self.index_coincidence = val
 
 
 def load_english() -> Alphabet:

@@ -6,6 +6,8 @@ class FrequencyAnalysis:
     def __init__(self, text: str, abc: Alphabet, key_len_from=0, key_len_to=20):
         self.text = text
         self.abc = abc
+        if key_len_from < 1:  # In case from is zero or less
+            key_len_from = 1
         self.klf = key_len_from
         self.klt = key_len_to
 
@@ -14,8 +16,8 @@ class FrequencyAnalysis:
     def hack_key_word(self):
         coincidence_index = 0
         enc_letters = self._get_only_letters_()
-        key_len = self.klf
-        while coincidence_index < self.abc.index_coincidence and key_len < self.klt:
+        key_len = self.klf - 1
+        while coincidence_index < self.abc.index_coincidence and key_len < self.klt + 1:  # Because klt value in range
             key_len += 1
             coincidence_index = self.get_coincidence_index(enc_letters, key_len)
             # print(f"Index equal {coincidence_index} at {key_len} key length")
