@@ -10,6 +10,7 @@ class GammaCipher(LetterCipher):
 
     def key_gen(self, is_cipher: bool):
         last_key = self.init_key
+        yield last_key
         while True:
             last_key = (last_key * self.A + self.B) % self.M
             yield last_key

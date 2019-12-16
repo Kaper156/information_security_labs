@@ -11,7 +11,7 @@ from ciphers.gamma import GammaCipher
 from ciphers.viginer import ViginerCipher
 from core.alphabet import load_english
 from core.frequency import FrequencyAnalysis
-from core.settings_default import get_random_text, get_texts_paths
+from core.settings_default import get_big_text, get_small_text
 from gui.threading.cipher import CipherThread
 from gui.threading.frequency import FrequencyThread
 
@@ -135,7 +135,7 @@ class Wrapper(QtWidgets.QMainWindow, Ui_MainWindow):
             self.leOutPath, caption="Укажите выходной файл", open_mode=False))
 
         # Init input text
-        self.leSourcePath.setText(get_random_text())
+        self.leSourcePath.setText(get_small_text())
         self.btnLoadSource.click()  # Load it to PlainEdit
 
         # Init cipher/decipher btns
@@ -150,7 +150,7 @@ class Wrapper(QtWidgets.QMainWindow, Ui_MainWindow):
         self.connect_toolbox()
 
         # Init freqs
-        self.leAbcSourcePath.setText(get_texts_paths()[0])
+        self.leAbcSourcePath.setText(get_big_text())
         self.load_abc_freqs()
 
     def connect_toolbox(self):
@@ -163,12 +163,18 @@ class Wrapper(QtWidgets.QMainWindow, Ui_MainWindow):
                                           caption="Выбор образца с типичным распределением частот"))
 
         # Set feedback for Abc page
-        self.sbAbcLength.valueChanged.connect(lambda: self.abc.set_length(self.sbAbcLength.value()))
+        self.sbAbcLength.editingFinished.connect(lambda: self.abc.set_length(self.sbAbcLength.value()))
         self.leAbcFL.editingFinished.connect(lambda: self.abc.set_fl(self.leAbcFL.text()))
         self.leAbcFU.editingFinished.connect(lambda: self.abc.set_fu(self.leAbcFU.text()))
-        self.dsbAbcFrequency.valueChanged.connect(lambda: self.abc.set_index_coincidence(self.dsbAbcFrequency.value()))
-        self.sbFreqKeyFrom.valueChanged.connect(self._freq_key_from_changed_)
-        self.sbFreqKeyTo.valueChanged.connect(self._freq_key_to_changed_)
+        self.dsbAbcFrequency.editingFinished.connect(
+            lambda: self.abc.set_index_coincidence(self.dsbAbcFrequency.value()))
+        self.sbFreqKeyFrom.editingFinished.connect(self._freq_key_from_changed_)
+        self.sbFreqKeyTo.editingFinished.connect(self._freq_key_to_changed_)
+
+        # To update freqs
+        self.sbAbcLength.editingFinished.connect(self.update_abc_freqs)
+        self.leAbcFL.editingFinished.connect(self.update_abc_freqs)
+        self.leAbcFU.editingFinished.connect(self.update_abc_freqs)
 
         # Table of frequences
         self.tvAbcLettersFreqs.setColumnCount(2)
@@ -261,10 +267,13 @@ class Wrapper(QtWidgets.QMainWindow, Ui_MainWindow):
     def load_abc_freqs(self):
         if len(self.leAbcSourcePath.text().strip()) == 0:
             return
-        with open(self.leAbcSourcePath.text(), 'rt') as f:
-            self.abc.calc_frequencies(f.read().strip())
-        self.tvAbcLettersFreqs.setRowCount(self.abc.length)
+        with open(self.leAbcSourcePath.text(), 'rt', encoding=self.encoding) as f:
+            self.abc.text = f.read().strip()
+            self.abc.__reload__()
+        self.update_abc_freqs()
 
+    def update_abc_freqs(self):
+        self.tvAbcLettersFreqs.setRowCount(self.abc.length)
         TabItem = QtWidgets.QTableWidgetItem
         for row_index, (letter, freq) in enumerate(self.abc.frequencies):
             self.tvAbcLettersFreqs.setItem(row_index, 0, TabItem(letter))

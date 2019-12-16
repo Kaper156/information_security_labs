@@ -11,6 +11,14 @@ def get_texts_paths():
             if os.path.isfile(os.path.join(SOURCE_TEXTS_PATH, f))]
 
 
+def get_big_text():
+    return os.path.join(SOURCE_TEXTS_PATH, 'mobydick.txt')
+
+
+def get_small_text():
+    return os.path.join(SOURCE_TEXTS_PATH, 'a-serious-case.txt')
+
+
 def get_random_text():
     from random import choice
     return choice(get_texts_paths())
