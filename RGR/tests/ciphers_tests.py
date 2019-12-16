@@ -52,3 +52,12 @@ class LetterCipherTest(unittest.TestCase):
             self.assertNotEqual(text, text_ciphered, 'Text not ciphered!')
             self.assertEqual(text, text_deciphered, 'Source and decoded text not equal!')
             print(f"{cipher_title} passed")
+
+    def test_viginer_code_and_edoc(self):
+        text = 'Some small text 12345 WiTh dumB ReGisTeR'
+        C = self.ciphers['Viginer-cipher']
+        C.key = 'HEIL'
+        ciphered = C.ciphering(text)
+        code = "TWSP"
+        C.key = code
+        self.assertEqual(C.ciphering(ciphered), text)

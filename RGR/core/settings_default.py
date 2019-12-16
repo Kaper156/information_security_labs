@@ -1,6 +1,8 @@
 import os
 
-SOURCE_TEXTS_PATH = os.path.abspath('../source_texts')
+while "RGR" in os.path.abspath(os.curdir):  # For tests
+    os.chdir('..')  # Switch to parent
+SOURCE_TEXTS_PATH = os.path.abspath('./source_texts')
 
 
 def get_texts_paths():

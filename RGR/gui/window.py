@@ -143,6 +143,7 @@ class Ui_MainWindow(object):
         self.dsbAbcFrequency = QtWidgets.QDoubleSpinBox(self.pageAlphabet)
         self.dsbAbcFrequency.setDecimals(5)
         self.dsbAbcFrequency.setMaximum(1.0)
+        self.dsbAbcFrequency.setSingleStep(1e-06)
         self.dsbAbcFrequency.setObjectName("dsbAbcFrequency")
         self.formLayout.setWidget(11, QtWidgets.QFormLayout.FieldRole, self.dsbAbcFrequency)
         self.label_5 = QtWidgets.QLabel(self.pageAlphabet)
